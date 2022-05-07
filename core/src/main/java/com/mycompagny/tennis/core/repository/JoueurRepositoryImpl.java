@@ -1,8 +1,6 @@
 package com.mycompagny.tennis.core.repository;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import com.mycompagny.tennis.core.HibernateUtil;
 import com.mycompagny.tennis.core.entity.Joueur;
@@ -14,70 +12,17 @@ public class JoueurRepositoryImpl {
 
     public Joueur getById(Long id) {
 	Joueur joueur = null;
-	Session session = null;
-
-	try {
-	    session = HibernateUtil.getSessionFactory().openSession();
-
-	    joueur = session.get(Joueur.class, id);
-
-	    System.out.println("Joueur lu");
-	} catch (HibernateException t) {
-	    t.printStackTrace();
-	} finally {
-	    if (session != null) {
-		session.close();
-	    }
-	}
+	Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+	joueur = session.get(Joueur.class, id);
+	System.out.println("Joueur lu");
 	return joueur;
     }
 
     public Joueur create(Joueur joueur) {
-	Session session = null;
-	Transaction tx = null;
-
-	try {
-	    session = HibernateUtil.getSessionFactory().openSession();
-	    tx = session.beginTransaction();
-	    session.persist(joueur);
-	    tx.commit();
-
-	    System.out.println("Joueur créé");
-	} catch (Exception e) {
-	    if (tx != null) {
-		tx.rollback();
-	    }
-	    e.printStackTrace();
-	} finally {
-	    if (session != null) {
-		session.close();
-	    }
-	}
+	Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+	session.persist(joueur);
+	System.out.println("Joueur créé");
 	return joueur;
-    }
-
-    public void renomme(Long id, String nouveauNom) {
-	Joueur joueur = null;
-	Session session = null;
-	Transaction tx = null;
-
-	try {
-	    session = HibernateUtil.getSessionFactory().openSession();
-	    tx = session.beginTransaction();
-	    joueur = session.get(Joueur.class, id);
-	    joueur.setNom(nouveauNom);
-	    tx.commit();
-	    System.out.println("Nom du joueur modifié");
-	} catch (Exception e) {
-	    if (tx != null) {
-		tx.rollback();
-	    }
-	    e.printStackTrace();
-	} finally {
-	    if (session != null) {
-		session.close();
-	    }
-	}
     }
 
 //    public void update(Joueur joueur) {
