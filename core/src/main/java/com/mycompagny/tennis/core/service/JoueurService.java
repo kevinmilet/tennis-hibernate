@@ -8,14 +8,18 @@ public class JoueurService {
     private final JoueurRepositoryImpl joueurRepository;
 
     public JoueurService() {
-        this.joueurRepository = new JoueurRepositoryImpl();
+	this.joueurRepository = new JoueurRepositoryImpl();
     }
-    
-//    public Joueur createJoueur(Joueur joueur) {
-//        return joueurRepository.create(joueur);
-//    }
+
+    public Joueur createJoueur(Joueur joueur) {
+	return joueurRepository.create(joueur);
+    }
 
     public Joueur getJoueur(Long id) {
-        return joueurRepository.getById(id);
+	return joueurRepository.getById(id);
+    }
+
+    public void renomme(Long id, String nouveauNom) {
+	joueurRepository.renomme(id, nouveauNom);
     }
 }
