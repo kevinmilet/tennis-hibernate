@@ -25,72 +25,13 @@ public class JoueurRepositoryImpl {
 	return joueur;
     }
 
-//    public void update(Joueur joueur) {
-//        Connection conn = null;
-//        try {
-//            DataSource dataSource =  DataSourceProvider.getSingleDataSourceInstance();
-//
-//            conn = dataSource.getConnection();
-//
-//            PreparedStatement preparedStatement = conn.prepareStatement("UPDATE JOUEUR SET NOM = ? , PRENOM = ?, SEXE = ? WHERE ID = ?");
-//
-//            preparedStatement.setString(1, joueur.getNom());
-//            preparedStatement.setString(2, joueur.getPrenom());
-//            preparedStatement.setString(3, joueur.getSexe().toString());
-//            preparedStatement.setLong(4, joueur.getId());
-//
-//            preparedStatement.executeUpdate();
-//
-//            System.out.println("Joueur modifié");
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            try {
-//                if (conn != null) conn.rollback();
-//            } catch (SQLException ex) {
-//                throw new RuntimeException(ex);
-//            }
-//        } finally {
-//            try {
-//                if (conn != null) {
-//                    conn.close();
-//                }
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
-//
-//    public void delete(Long id) {
-//        Connection conn = null;
-//        try {
-//            DataSource dataSource =  DataSourceProvider.getSingleDataSourceInstance();
-//
-//            conn = dataSource.getConnection();
-//
-//            PreparedStatement preparedStatement = conn.prepareStatement("DELETE FROM JOUEUR WHERE ID = ?");
-//
-//            preparedStatement.setLong(1, id);
-//
-//            preparedStatement.executeUpdate();
-//
-//            System.out.println("Joueur supprimé");
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            try {
-//                if (conn != null) conn.rollback();
-//            } catch (SQLException ex) {
-//                throw new RuntimeException(ex);
-//            }
-//        } finally {
-//            try {
-//                if (conn != null) {
-//                    conn.close();
-//                }
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
+    public void delete(Long id) {
+	Joueur joueur = getById(id);
+	Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+	session.delete(joueur);
+	System.out.println("Joueur supprimé");
+
+    }
 
 //    public List<Joueur> getAll() {
 //        Connection conn = null;

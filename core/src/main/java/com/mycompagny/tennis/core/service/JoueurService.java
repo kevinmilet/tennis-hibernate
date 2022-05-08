@@ -60,14 +60,64 @@ public class JoueurService {
     }
 
     public void renomme(Long id, String nouveauNom) {
+	Joueur joueur = this.getJoueur(id);
+
 	Session session = null;
 	Transaction tx = null;
 
 	try {
 	    session = HibernateUtil.getSessionFactory().getCurrentSession();
 	    tx = session.beginTransaction();
-	    Joueur joueur = joueurRepository.getById(id);
 	    joueur.setNom(nouveauNom);
+	    session.merge(joueur);
+
+	    tx.commit();
+	} catch (Exception e) {
+	    if (tx != null) {
+		tx.rollback();
+	    }
+	    e.printStackTrace();
+	} finally {
+	    if (session != null) {
+		session.close();
+	    }
+	}
+    }
+
+    public void changeSexe(Long id, Character sexe) {
+	Joueur joueur = this.getJoueur(id);
+
+	Session session = null;
+	Transaction tx = null;
+
+	try {
+	    session = HibernateUtil.getSessionFactory().getCurrentSession();
+	    tx = session.beginTransaction();
+	    joueur.setSexe(sexe);
+	    session.merge(joueur);
+
+	    tx.commit();
+	} catch (Exception e) {
+	    if (tx != null) {
+		tx.rollback();
+	    }
+	    e.printStackTrace();
+	} finally {
+	    if (session != null) {
+		session.close();
+	    }
+	}
+    }
+
+    public void deleteJoueur(Long id) {
+	Session session = null;
+	Transaction tx = null;
+
+	try {
+	    session = HibernateUtil.getSessionFactory().getCurrentSession();
+	    tx = session.beginTransaction();
+	    joueurRepository.delete(id);
+
 	    tx.commit();
 	} catch (Exception e) {
 	    if (tx != null) {

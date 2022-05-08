@@ -10,13 +10,13 @@ public class MatchService {
     private final MatchRepositoryImpl matchRepository;
 
     public MatchService() {
-        this.scoreRepository = new ScoreRepositoryImpl();
-        this.matchRepository = new MatchRepositoryImpl();
+	this.scoreRepository = new ScoreRepositoryImpl();
+	this.matchRepository = new MatchRepositoryImpl();
     }
 
     public void enregistrerNouveauMatch(Match match) {
-        matchRepository.create(match);
-        scoreRepository.create(match.getScore());
+	matchRepository.create(match);
+	scoreRepository.create(match.getScore());
     }
-    
+
 }

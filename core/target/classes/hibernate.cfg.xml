@@ -38,6 +38,8 @@
 		<!-- Enities to map -->
         <mapping class="com.mycompagny.tennis.core.entity.Joueur" />
 		<mapping class="com.mycompagny.tennis.core.entity.Tournoi" />
+		<mapping class="com.mycompagny.tennis.core.entity.Epreuve" />
+		<mapping class="com.mycompagny.tennis.core.entity.Score" />
 
     </session-factory>
 

@@ -41,4 +41,31 @@ public class TournoiController {
 	System.out.println("Le tournoi " + tournoi.getNom() + " " + tournoi.getCode() + " a été créé avec l'id "
 		+ tournoi.getId());
     }
+
+    public void renommeTournoi() {
+	Scanner scanner = new Scanner(System.in);
+	System.out.println("Quel est l'identifiant du tournoi que vous voulez renommer ?");
+	long id = scanner.nextLong();
+	scanner.nextLine();
+	System.out.println("Nouveau nom ?");
+	String nom = scanner.nextLine();
+	tournoiService.renomme(id, nom);
+    }
+
+    public void changeCode() {
+	Scanner scanner = new Scanner(System.in);
+	System.out.println("Quel est l'identifiant du tournoi dont vous voulez changer le code ?");
+	long id = scanner.nextLong();
+	scanner.nextLine();
+	System.out.println("Nouveau code ?");
+	String code = scanner.nextLine();
+	tournoiService.changeCode(id, code);
+    }
+
+    public void supprimeTournoi() {
+	Scanner scanner = new Scanner(System.in);
+	System.out.println("Quel est l'identifiant du tournoi à supprimer ?");
+	long id = scanner.nextLong();
+	tournoiService.deleteTournoi(id);
+    }
 }
