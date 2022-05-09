@@ -40,6 +40,7 @@
 		<mapping class="com.mycompagny.tennis.core.entity.Tournoi" />
 		<mapping class="com.mycompagny.tennis.core.entity.Epreuve" />
 		<mapping class="com.mycompagny.tennis.core.entity.Score" />
+		<mapping class="com.mycompagny.tennis.core.entity.Match" />
 
     </session-factory>
 
