@@ -9,125 +9,125 @@ import com.mycompagny.tennis.core.repository.TournoiRepositoryImpl;
 
 public class TournoiService {
 
-    private TournoiRepositoryImpl tournoiRepository;
+	private TournoiRepositoryImpl tournoiRepository;
 
-    public TournoiService() {
-	this.tournoiRepository = new TournoiRepositoryImpl();
-    }
-
-    public void createTournoi(Tournoi tournoi) {
-	Session session = null;
-	Transaction tx = null;
-
-	try {
-	    session = HibernateUtil.getSessionFactory().getCurrentSession();
-	    tx = session.beginTransaction();
-	    tournoiRepository.create(tournoi);
-	    tx.commit();
-	} catch (Exception e) {
-	    if (tx != null) {
-		tx.rollback();
-	    }
-	    e.printStackTrace();
-	} finally {
-	    if (session != null) {
-		session.close();
-	    }
+	public TournoiService() {
+		this.tournoiRepository = new TournoiRepositoryImpl();
 	}
-    }
 
-    public Tournoi getTournoi(Long id) {
-	Session session = null;
-	Transaction tx = null;
-	Tournoi tournoi = null;
+	public void createTournoi(Tournoi tournoi) {
+		Session session = null;
+		Transaction tx = null;
 
-	try {
-	    session = HibernateUtil.getSessionFactory().getCurrentSession();
-	    tx = session.beginTransaction();
-	    tournoi = tournoiRepository.getById(id);
-	    tx.commit();
-	} catch (Exception e) {
-	    if (tx != null) {
-		tx.rollback();
-	    }
-	    e.printStackTrace();
-	} finally {
-	    if (session != null) {
-		session.close();
-	    }
+		try {
+			session = HibernateUtil.getSessionFactory().getCurrentSession();
+			tx = session.beginTransaction();
+			tournoiRepository.create(tournoi);
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
 	}
-	return tournoi;
-    }
 
-    public void renomme(Long id, String nouveauNom) {
-	Tournoi tournoi = this.getTournoi(id);
+	public Tournoi getTournoi(Long id) {
+		Session session = null;
+		Transaction tx = null;
+		Tournoi tournoi = null;
 
-	Session session = null;
-	Transaction tx = null;
-
-	try {
-	    session = HibernateUtil.getSessionFactory().getCurrentSession();
-	    tx = session.beginTransaction();
-	    tournoi.setNom(nouveauNom);
-	    session.merge(tournoi);
-
-	    tx.commit();
-	} catch (Exception e) {
-	    if (tx != null) {
-		tx.rollback();
-	    }
-	    e.printStackTrace();
-	} finally {
-	    if (session != null) {
-		session.close();
-	    }
+		try {
+			session = HibernateUtil.getSessionFactory().getCurrentSession();
+			tx = session.beginTransaction();
+			tournoi = tournoiRepository.getById(id);
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return tournoi;
 	}
-    }
 
-    public void changeCode(Long id, String code) {
-	Tournoi tournoi = this.getTournoi(id);
+	public void renomme(Long id, String nouveauNom) {
+		Tournoi tournoi = this.getTournoi(id);
 
-	Session session = null;
-	Transaction tx = null;
+		Session session = null;
+		Transaction tx = null;
 
-	try {
-	    session = HibernateUtil.getSessionFactory().getCurrentSession();
-	    tx = session.beginTransaction();
-	    tournoi.setCode(code);
-	    session.merge(tournoi);
+		try {
+			session = HibernateUtil.getSessionFactory().getCurrentSession();
+			tx = session.beginTransaction();
+			tournoi.setNom(nouveauNom);
+			session.merge(tournoi);
 
-	    tx.commit();
-	} catch (Exception e) {
-	    if (tx != null) {
-		tx.rollback();
-	    }
-	    e.printStackTrace();
-	} finally {
-	    if (session != null) {
-		session.close();
-	    }
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
 	}
-    }
 
-    public void deleteTournoi(Long id) {
-	Session session = null;
-	Transaction tx = null;
+	public void changeCode(Long id, String code) {
+		Tournoi tournoi = this.getTournoi(id);
 
-	try {
-	    session = HibernateUtil.getSessionFactory().getCurrentSession();
-	    tx = session.beginTransaction();
-	    tournoiRepository.delete(id);
+		Session session = null;
+		Transaction tx = null;
 
-	    tx.commit();
-	} catch (Exception e) {
-	    if (tx != null) {
-		tx.rollback();
-	    }
-	    e.printStackTrace();
-	} finally {
-	    if (session != null) {
-		session.close();
-	    }
+		try {
+			session = HibernateUtil.getSessionFactory().getCurrentSession();
+			tx = session.beginTransaction();
+			tournoi.setCode(code);
+			session.merge(tournoi);
+
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
 	}
-    }
+
+	public void deleteTournoi(Long id) {
+		Session session = null;
+		Transaction tx = null;
+
+		try {
+			session = HibernateUtil.getSessionFactory().getCurrentSession();
+			tx = session.beginTransaction();
+			tournoiRepository.delete(id);
+
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+	}
 }
